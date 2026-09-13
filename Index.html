@@ -3,65 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillArena - Pro Edition</title>
+    <title>SkillArena - Pro Gaming</title>
     <style>
         /* === GLOBAL STYLES === */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0d1117; color: #c9d1d9; padding-bottom: 75px; }
+        body { background-color: #0d1117; color: #c9d1d9; }
+        .hidden { display: none !important; }
         
-        /* === HEADER === */
-        header { background-color: #161b22; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2ea043; position: sticky; top: 0; z-index: 100;}
-        header h1 { font-size: 22px; color: #2ea043; letter-spacing: 1px; font-weight: bold;}
-        .balance { background: #21262d; padding: 6px 12px; border-radius: 20px; font-size: 14px; color: #e3b341; border: 1px solid #30363d; font-weight: bold;}
+        /* === AUTH (LOGIN/SIGNUP) SECTION === */
+        #auth-section { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; background: linear-gradient(135deg, #0d1117 0%, #161b22 100%); }
+        .auth-card { background-color: #161b22; width: 100%; max-width: 400px; padding: 30px; border-radius: 15px; border: 1px solid #30363d; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+        .auth-card h1 { color: #2ea043; margin-bottom: 10px; font-size: 28px; }
+        .auth-card p { color: #8b949e; font-size: 14px; margin-bottom: 25px; }
         
-        /* === CONTAINERS === */
+        /* === APP HEADER === */
+        header { background-color: #161b22; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2ea043; position: sticky; top: 0; z-index: 100; }
+        header h1 { font-size: 22px; color: #2ea043; letter-spacing: 1px; font-weight: bold; }
+        .balance { background: #21262d; padding: 6px 12px; border-radius: 20px; font-size: 14px; color: #e3b341; border: 1px solid #30363d; font-weight: bold; }
+        
+        /* === CONTAINERS & CARDS === */
+        #app-section { padding-bottom: 75px; }
         .container { padding: 20px; animation: fadeIn 0.3s ease-in-out; }
-        .section-title { font-size: 18px; margin-bottom: 20px; color: #ffffff; border-left: 4px solid #2ea043; padding-left: 10px; font-weight: 600;}
-        .hidden { display: none; }
+        .section-title { font-size: 18px; margin-bottom: 20px; color: #ffffff; border-left: 4px solid #2ea043; padding-left: 10px; font-weight: 600; }
         
-        /* === MATCH CARDS === */
         .match-card { background-color: #161b22; border-radius: 12px; padding: 18px; margin-bottom: 18px; border: 1px solid #30363d; position: relative; overflow: hidden; }
         .skill-badge { position: absolute; top: 0; right: 0; background: #2ea043; color: #ffffff; font-size: 10px; font-weight: bold; padding: 4px 10px; border-bottom-left-radius: 8px; }
-        .game-title { font-size: 13px; color: #8b949e; margin-bottom: 15px; text-transform: uppercase; font-weight: bold;}
-        .teams-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;}
-        .team { text-align: center; font-weight: bold; font-size: 15px; width: 40%; color: #ffffff;}
-        .vs { color: #8b949e; font-size: 12px; font-weight: bold; background: #21262d; padding: 4px 8px; border-radius: 5px; border: 1px solid #30363d;}
-        .prize-pool { color: #e3b341; font-weight: bold; font-size: 13px; margin-top: 15px; text-align: center;}
+        .game-title { font-size: 13px; color: #8b949e; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; }
+        .teams-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .team { text-align: center; font-weight: bold; font-size: 15px; width: 40%; color: #ffffff; }
+        .vs { color: #8b949e; font-size: 12px; font-weight: bold; background: #21262d; padding: 4px 8px; border-radius: 5px; border: 1px solid #30363d; }
+        .prize-pool { color: #e3b341; font-weight: bold; font-size: 13px; margin-top: 15px; text-align: center; }
         
         /* === BUTTONS & INPUTS === */
-        .primary-btn { background-color: #2ea043; color: #ffffff; border: none; padding: 14px; border-radius: 8px; font-weight: bold; width: 100%; margin-top: 15px; cursor: pointer; font-size: 15px;}
-        .primary-btn:active { background-color: #238636; }
-        .secondary-btn { background-color: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 14px; border-radius: 8px; font-weight: bold; width: 100%; margin-top: 10px; cursor: pointer;}
+        .primary-btn { background-color: #2ea043; color: #ffffff; border: none; padding: 14px; border-radius: 8px; font-weight: bold; width: 100%; margin-top: 15px; cursor: pointer; font-size: 15px; transition: 0.2s; }
+        .primary-btn:active { transform: scale(0.98); background-color: #238636; }
+        .secondary-btn { background-color: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 14px; border-radius: 8px; font-weight: bold; width: 100%; margin-top: 10px; cursor: pointer; }
         
         .input-group { margin-bottom: 15px; text-align: left; }
         .input-group label { display: block; font-size: 13px; color: #8b949e; margin-bottom: 5px; }
         .input-group input, .input-group select { width: 100%; padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; color: white; font-size: 16px; outline: none; }
         .input-group input:focus { border-color: #2ea043; }
 
-        /* === WALLET & FORMS === */
+        /* === WALLET & PROFILE === */
         .wallet-card { background: linear-gradient(135deg, #2ea043 0%, #175422 100%); padding: 25px; border-radius: 12px; text-align: center; color: white; margin-bottom: 20px; }
-        .wallet-actions { display: flex; gap: 10px; margin-top: 15px;}
-        .history-item { display: flex; justify-content: space-between; background: #161b22; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #30363d;}
+        .wallet-actions { display: flex; gap: 10px; margin-top: 15px; }
+        .history-item { display: flex; justify-content: space-between; background: #161b22; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #30363d; }
+        .header-back { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: #2ea043; font-weight: bold; cursor: pointer; font-size: 16px; }
         
-        .header-back { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: #2ea043; font-weight: bold; cursor: pointer; font-size: 16px;}
-        .amount-chips { display: flex; gap: 10px; margin-bottom: 20px; }
-        .chip { background: #21262d; padding: 8px 15px; border-radius: 20px; font-size: 13px; border: 1px solid #30363d; cursor: pointer; flex: 1; text-align: center;}
-        
-        /* === PROFILE SETTINGS LIST === */
-        .settings-list { background: #161b22; border-radius: 12px; overflow: hidden; border: 1px solid #30363d; margin-top: 20px;}
-        .setting-item { display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #30363d; cursor: pointer; font-size: 15px; color: #ffffff;}
+        .settings-list { background: #161b22; border-radius: 12px; overflow: hidden; border: 1px solid #30363d; margin-top: 20px; }
+        .setting-item { display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #30363d; cursor: pointer; font-size: 15px; color: #ffffff; }
         .setting-item:last-child { border-bottom: none; }
-        .setting-item span:last-child { color: #8b949e; }
 
         /* === BOTTOM NAVIGATION === */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background-color: #161b22; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #30363d; z-index: 100;}
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background-color: #161b22; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #30363d; z-index: 100; }
         .nav-item { color: #8b949e; font-size: 12px; cursor: pointer; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .nav-icon { font-size: 20px; }
         .active-nav { color: #2ea043; }
         
         /* === MODAL === */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 999; visibility: hidden; opacity: 0; transition: 0.3s; padding: 20px;}
-        .modal-box { background: #161b22; width: 100%; max-width: 350px; padding: 25px; border-radius: 15px; text-align: center; border: 1px solid #30363d;}
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 999; visibility: hidden; opacity: 0; transition: 0.3s; padding: 20px; }
+        .modal-box { background: #161b22; width: 100%; max-width: 350px; padding: 25px; border-radius: 15px; text-align: center; border: 1px solid #30363d; }
         .modal-overlay.show { visibility: visible; opacity: 1; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
@@ -69,190 +70,146 @@
 </head>
 <body>
 
-    <!-- Main App Header -->
-    <header>
-        <h1>SkillArena</h1>
-        <div class="balance">💰 <span class="display-balance">500</span> Pts</div>
-    </header>
-
-    <!-- ==================== 1. HOME SCREEN (Matches) ==================== -->
-    <div id="view-home" class="container">
-        <div class="section-title">Play & Win</div>
-
-        <div class="match-card">
-            <div class="skill-badge">SKILL GAME</div>
-            <div class="game-title">BGMI Pro Scrims</div>
-            <div class="teams-row">
-                <div class="team">Erangel Map</div>
-                <div class="vs">100P</div>
-                <div class="team">Squad TPP</div>
-            </div>
-            <div class="prize-pool">🏆 Prize: 50 Pts Per Kill</div>
-            <button class="primary-btn" onclick="joinMatch(50, 'BGMI Scrims')">Join Entry: 50 Pts</button>
-        </div>
-
-        <div class="match-card">
-            <div class="skill-badge">SKILL GAME</div>
-            <div class="game-title">Fantasy Cricket</div>
-            <div class="teams-row">
-                <div class="team">India</div>
-                <div class="vs">VS</div>
-                <div class="team">Australia</div>
-            </div>
-            <div class="prize-pool">🏆 Prize Pool: 10,000 Pts</div>
-            <button class="primary-btn" onclick="joinMatch(100, 'Fantasy Cricket')">Create Team: 100 Pts</button>
-        </div>
-
-        <div class="match-card">
-            <div class="skill-badge">SKILL GAME</div>
-            <div class="game-title">Speed Chess (3 Min)</div>
-            <div class="teams-row">
-                <div class="team">You</div>
-                <div class="vs">1v1</div>
-                <div class="team">Opponent</div>
-            </div>
-            <div class="prize-pool">🏆 Winner: 40 Pts</div>
-            <button class="primary-btn" onclick="joinMatch(25, 'Speed Chess')">Find Player: 25 Pts</button>
-        </div>
-        
-        <div class="match-card">
-            <div class="skill-badge">SKILL GAME</div>
-            <div class="game-title">Carrom Master</div>
-            <div class="teams-row">
-                <div class="team">You</div>
-                <div class="vs">1v1</div>
-                <div class="team">Opponent</div>
-            </div>
-            <div class="prize-pool">🏆 Winner: 18 Pts</div>
-            <button class="primary-btn" onclick="joinMatch(10, 'Carrom Master')">Play Now: 10 Pts</button>
-        </div>
-    </div>
-
-    <!-- ==================== 2. WALLET MAIN SCREEN ==================== -->
-    <div id="view-wallet" class="container hidden">
-        <div class="section-title">My Wallet</div>
-        <div class="wallet-card">
-            <p style="font-size: 14px;">Total Balance</p>
-            <h2>₹ <span class="display-balance">500</span></h2>
-            <p style="font-size: 12px; color: #a3e6b5;">1 Point = ₹1</p>
-            
-            <div class="wallet-actions">
-                <button class="secondary-btn" style="background: white; color: black; border:none;" onclick="switchScreen('view-deposit')">+ Add Cash</button>
-                <button class="secondary-btn" style="background: transparent; color: white; border: 1px solid white;" onclick="switchScreen('view-withdraw')">- Withdraw</button>
-            </div>
-        </div>
-
-        <div class="section-title" style="font-size: 16px;">Transaction History</div>
-        <div id="transaction-list">
-            <div class="history-item">
-                <div><p style="color:white; font-size:14px;">Welcome Bonus</p><p style="color:#8b949e; font-size:12px;">Today</p></div>
-                <div style="color:#2ea043; font-weight:bold;">+ 500</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- === 2A. DEPOSIT SCREEN (Add Funds) === -->
-    <div id="view-deposit" class="container hidden">
-        <div class="header-back" onclick="switchScreen('view-wallet')">← Back to Wallet</div>
-        <div class="section-title">Add Funds</div>
-        
-        <div class="match-card">
-            <div class="input-group">
-                <label>Enter Amount (₹)</label>
-                <input type="number" id="deposit-amount" placeholder="e.g. 500">
-            </div>
-            <div class="amount-chips">
-                <div class="chip" onclick="setDepositAmount(100)">+ ₹100</div>
-                <div class="chip" onclick="setDepositAmount(500)">+ ₹500</div>
-                <div class="chip" onclick="setDepositAmount(1000)">+ ₹1000</div>
-            </div>
-            <div class="input-group">
-                <label>Select Payment Method</label>
-                <select id="payment-method">
-                    <option>UPI (GPay, PhonePe, Paytm)</option>
-                    <option>Debit / Credit Card</option>
-                    <option>Net Banking</option>
-                </select>
-            </div>
-            <button class="primary-btn" onclick="processDeposit()">Proceed to Pay</button>
-        </div>
-    </div>
-
-    <!-- === 2B. WITHDRAW SCREEN === -->
-    <div id="view-withdraw" class="container hidden">
-        <div class="header-back" onclick="switchScreen('view-wallet')">← Back to Wallet</div>
-        <div class="section-title">Withdraw Winnings</div>
-        
-        <div class="match-card">
-            <div style="text-align: center; margin-bottom: 20px;">
-                <p style="color: #8b949e; font-size: 13px;">Withdrawable Balance</p>
-                <h2 style="color: #2ea043;">₹ <span class="display-balance">500</span></h2>
-            </div>
+    <!-- ==================== AUTHENTICATION SCREEN ==================== -->
+    <div id="auth-section">
+        <div class="auth-card">
+            <h1>SkillArena</h1>
+            <p>India's Premium Gaming Platform</p>
             
             <div class="input-group">
-                <label>Amount to Withdraw (₹)</label>
-                <input type="number" id="withdraw-amount" placeholder="Min ₹100">
+                <label>Username</label>
+                <input type="text" id="auth-username" placeholder="Enter your username">
             </div>
             <div class="input-group">
-                <label>Enter UPI ID / Bank A/c</label>
-                <input type="text" id="withdraw-upi" placeholder="example@ybl or A/c No">
+                <label>Password</label>
+                <input type="password" id="auth-password" placeholder="Enter your password">
             </div>
-            <button class="primary-btn" style="background-color: #e3b341; color: black;" onclick="processWithdraw()">Submit Request</button>
-            <p style="font-size: 11px; color: #8b949e; text-align: center; margin-top: 10px;">Withdrawal takes 2-4 working hours to process.</p>
+            
+            <button class="primary-btn" onclick="handleLogin()">Login</button>
+            <button class="secondary-btn" onclick="handleSignup()">Create New Account</button>
+            <p style="margin-top: 15px; font-size: 12px; color: #8b949e;">New users get 500 Pts Welcome Bonus!</p>
         </div>
     </div>
 
-    <!-- ==================== 3. PROFILE / SETTINGS SCREEN ==================== -->
-    <div id="view-profile" class="container hidden">
-        <div class="section-title">My Account</div>
+    <!-- ==================== MAIN APP CONTENT ==================== -->
+    <div id="app-section" class="hidden">
         
-        <!-- User Info -->
-        <div class="match-card" style="display: flex; align-items: center; gap: 15px;">
-            <div style="width: 60px; height: 60px; background: #2ea043; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px;">👤</div>
-            <div>
-                <h2 style="color: #ffffff; font-size: 18px;">Gamer1234</h2>
-                <p style="color: #8b949e; font-size: 13px;">+91 9876543210</p>
-                <p style="color: #e3b341; font-size: 12px; margin-top: 2px;">Level 3 Player</p>
+        <header>
+            <h1>SkillArena</h1>
+            <div class="balance">💰 <span class="display-balance">0</span> Pts</div>
+        </header>
+
+        <!-- 1. HOME SCREEN (Matches) -->
+        <div id="view-home" class="container">
+            <div class="section-title">Play & Win</div>
+
+            <div class="match-card">
+                <div class="skill-badge">SKILL GAME</div>
+                <div class="game-title">BGMI Pro Scrims</div>
+                <div class="teams-row">
+                    <div class="team">Erangel Map</div>
+                    <div class="vs">100P</div>
+                    <div class="team">Squad TPP</div>
+                </div>
+                <div class="prize-pool">🏆 Prize: 50 Pts Per Kill</div>
+                <button class="primary-btn" onclick="joinMatch(50, 'BGMI Scrims')">Join Entry: 50 Pts</button>
+            </div>
+
+            <div class="match-card">
+                <div class="skill-badge">SKILL GAME</div>
+                <div class="game-title">Speed Chess (3 Min)</div>
+                <div class="teams-row">
+                    <div class="team">You</div>
+                    <div class="vs">1v1</div>
+                    <div class="team">Opponent</div>
+                </div>
+                <div class="prize-pool">🏆 Winner: 40 Pts</div>
+                <button class="primary-btn" onclick="joinMatch(25, 'Speed Chess')">Find Player: 25 Pts</button>
             </div>
         </div>
 
-        <!-- Settings Options -->
-        <div class="settings-list">
-            <div class="setting-item" onclick="showPopup('KYC Verification', 'Please upload your PAN or Aadhaar card to verify your age (18+).')">
-                <span>🛡️ KYC Verification</span>
-                <span style="color: #f85149; font-size: 12px; background: #301b1b; padding: 2px 6px; border-radius: 4px;">Pending</span>
+        <!-- 2. WALLET SCREEN -->
+        <div id="view-wallet" class="container hidden">
+            <div class="section-title">My Wallet</div>
+            <div class="wallet-card">
+                <p style="font-size: 14px;">Total Balance</p>
+                <h2>₹ <span class="display-balance">0</span></h2>
+                <p style="font-size: 12px; color: #a3e6b5;">1 Point = ₹1</p>
+                
+                <div class="wallet-actions">
+                    <button class="secondary-btn" style="background: white; color: black; border:none;" onclick="switchScreen('view-deposit')">+ Add Cash</button>
+                    <button class="secondary-btn" style="background: transparent; color: white; border: 1px solid white;" onclick="switchScreen('view-withdraw')">- Withdraw</button>
+                </div>
             </div>
-            <div class="setting-item" onclick="showPopup('Account Settings', 'Edit Username, Email, and Password (Coming Soon).')">
-                <span>⚙️ Account Settings</span>
-                <span>></span>
-            </div>
-            <div class="setting-item" onclick="showPopup('Help & Support', 'Contact us at support@skillarena.com or call 1800-XXX-XXXX.')">
-                <span>🎧 Help & Support</span>
-                <span>></span>
-            </div>
-            <div class="setting-item" onclick="showPopup('Terms & Policies', 'Read our Terms of Service and Privacy Policy.')">
-                <span>📄 Terms & Conditions</span>
-                <span>></span>
+            <div class="section-title" style="font-size: 16px;">Transaction History</div>
+            <div id="transaction-list">
+                <!-- History items will appear here -->
             </div>
         </div>
-        
-        <button class="secondary-btn" style="color: #f85149; border-color: #f85149; margin-top: 20px;" onclick="showPopup('Log Out', 'Are you sure you want to log out?')">Log Out</button>
+
+        <!-- 2A. DEPOSIT SCREEN -->
+        <div id="view-deposit" class="container hidden">
+            <div class="header-back" onclick="switchScreen('view-wallet')">← Back to Wallet</div>
+            <div class="section-title">Add Funds</div>
+            <div class="match-card">
+                <div class="input-group">
+                    <label>Enter Amount (₹)</label>
+                    <input type="number" id="deposit-amount" placeholder="e.g. 500">
+                </div>
+                <button class="primary-btn" onclick="processDeposit()">Proceed to Pay</button>
+            </div>
+        </div>
+
+        <!-- 2B. WITHDRAW SCREEN -->
+        <div id="view-withdraw" class="container hidden">
+            <div class="header-back" onclick="switchScreen('view-wallet')">← Back to Wallet</div>
+            <div class="section-title">Withdraw Winnings</div>
+            <div class="match-card">
+                <div class="input-group">
+                    <label>Amount to Withdraw (₹)</label>
+                    <input type="number" id="withdraw-amount" placeholder="Min ₹100">
+                </div>
+                <div class="input-group">
+                    <label>Enter UPI ID</label>
+                    <input type="text" id="withdraw-upi" placeholder="example@upi">
+                </div>
+                <button class="primary-btn" style="background-color: #e3b341; color: black;" onclick="processWithdraw()">Submit Request</button>
+            </div>
+        </div>
+
+        <!-- 3. PROFILE SCREEN -->
+        <div id="view-profile" class="container hidden">
+            <div class="section-title">My Account</div>
+            <div class="match-card" style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 60px; height: 60px; background: #2ea043; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px;">👤</div>
+                <div>
+                    <h2 id="display-username" style="color: #ffffff; font-size: 18px;">Gamer</h2>
+                    <p style="color: #e3b341; font-size: 12px; margin-top: 2px;">Verified Player</p>
+                </div>
+            </div>
+            
+            <div class="settings-list">
+                <div class="setting-item" onclick="showPopup('Help', 'Contact: support@skillarena.com')"><span>🎧 Help & Support</span><span>></span></div>
+            </div>
+            <button class="secondary-btn" style="color: #f85149; border-color: #f85149; margin-top: 20px;" onclick="handleLogout()">Log Out</button>
+        </div>
+
+        <!-- BOTTOM NAVIGATION -->
+        <div class="bottom-nav">
+            <div id="nav-home" class="nav-item active-nav" onclick="switchNav('home')">
+                <span class="nav-icon">🎮</span><span>Matches</span>
+            </div>
+            <div id="nav-wallet" class="nav-item" onclick="switchNav('wallet')">
+                <span class="nav-icon">💳</span><span>Wallet</span>
+            </div>
+            <div id="nav-profile" class="nav-item" onclick="switchNav('profile')">
+                <span class="nav-icon">👤</span><span>Profile</span>
+            </div>
+        </div>
+
     </div>
 
-    <!-- ==================== BOTTOM NAVIGATION ==================== -->
-    <div class="bottom-nav">
-        <div id="nav-home" class="nav-item active-nav" onclick="switchNav('home')">
-            <span class="nav-icon">🎮</span><span>Matches</span>
-        </div>
-        <div id="nav-wallet" class="nav-item" onclick="switchNav('wallet')">
-            <span class="nav-icon">💳</span><span>Wallet</span>
-        </div>
-        <div id="nav-profile" class="nav-item" onclick="switchNav('profile')">
-            <span class="nav-icon">👤</span><span>Profile</span>
-        </div>
-    </div>
-
-    <!-- ==================== POPUP MODAL ==================== -->
+    <!-- POPUP MODAL -->
     <div id="custom-modal" class="modal-overlay">
         <div class="modal-box">
             <h3 id="modal-title" style="color: white; margin-bottom: 10px;">Title</h3>
@@ -263,11 +220,101 @@
         </div>
     </div>
 
-    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <!-- === JAVASCRIPT === -->
     <script>
-        let userBalance = 500;
+        let currentUser = null;
+        let userBalance = 0;
 
-        // Update all elements showing balance
+        // Check if user is already logged in when page loads
+        window.onload = function() {
+            let savedUser = localStorage.getItem('loggedInUser');
+            if (savedUser) {
+                currentUser = savedUser;
+                loadUserData();
+                showApp();
+            }
+        };
+
+        // --- AUTHENTICATION LOGIC ---
+        function handleSignup() {
+            let user = document.getElementById('auth-username').value.trim();
+            let pass = document.getElementById('auth-password').value.trim();
+            
+            if(user === "" || pass === "") {
+                showPopup("Error", "Please enter a valid username and password.");
+                return;
+            }
+            if(localStorage.getItem('user_' + user)) {
+                showPopup("Error", "Username already exists. Please login instead.");
+                return;
+            }
+            
+            // Create new user with 500 points
+            let userData = { password: pass, balance: 500, history: [] };
+            localStorage.setItem('user_' + user, JSON.stringify(userData));
+            
+            // Log them in automatically
+            currentUser = user;
+            localStorage.setItem('loggedInUser', user);
+            loadUserData();
+            showApp();
+            
+            // Add welcome bonus history
+            addHistory("Welcome Bonus", 500, 'add');
+            showPopup("Welcome! 🎉", "Account created successfully. You got 500 Pts bonus!");
+        }
+
+        function handleLogin() {
+            let user = document.getElementById('auth-username').value.trim();
+            let pass = document.getElementById('auth-password').value.trim();
+            
+            let savedData = localStorage.getItem('user_' + user);
+            if(savedData) {
+                let parsedData = JSON.parse(savedData);
+                if(parsedData.password === pass) {
+                    currentUser = user;
+                    localStorage.setItem('loggedInUser', user);
+                    loadUserData();
+                    showApp();
+                } else {
+                    showPopup("Error", "Incorrect password!");
+                }
+            } else {
+                showPopup("Error", "Account not found. Please click 'Create New Account'.");
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('loggedInUser');
+            currentUser = null;
+            document.getElementById('app-section').classList.add('hidden');
+            document.getElementById('auth-section').classList.remove('hidden');
+            document.getElementById('auth-username').value = '';
+            document.getElementById('auth-password').value = '';
+        }
+
+        // --- DATA MANAGEMENT LOGIC ---
+        function loadUserData() {
+            let data = JSON.parse(localStorage.getItem('user_' + currentUser));
+            userBalance = data.balance;
+            
+            // Update UI
+            document.getElementById('display-username').innerText = currentUser;
+            updateBalanceUI();
+            
+            // Load History
+            document.getElementById('transaction-list').innerHTML = '';
+            data.history.forEach(item => {
+                renderHistoryItem(item.title, item.amount, item.type);
+            });
+        }
+
+        function saveUserData() {
+            let data = JSON.parse(localStorage.getItem('user_' + currentUser));
+            data.balance = userBalance;
+            localStorage.setItem('user_' + currentUser, JSON.stringify(data));
+        }
+
         function updateBalanceUI() {
             let elements = document.getElementsByClassName('display-balance');
             for(let i=0; i<elements.length; i++) {
@@ -275,27 +322,92 @@
             }
         }
 
-        // Navigation Menu Logic
+        function showApp() {
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('app-section').classList.remove('hidden');
+            switchNav('home');
+        }
+
+        // --- MATCH & WALLET LOGIC ---
+        function joinMatch(fee, name) {
+            if (userBalance >= fee) {
+                userBalance -= fee;
+                updateBalanceUI();
+                addHistory(`Joined: ${name}`, fee, 'deduct');
+                saveUserData();
+                showPopup("Success! 🎉", `You successfully joined ${name}.\n\nFee Deducted: ${fee} Pts`);
+            } else {
+                showPopup("Low Balance", "You don't have enough balance. Please Add Funds.");
+            }
+        }
+
+        function processDeposit() {
+            let amt = parseInt(document.getElementById('deposit-amount').value);
+            if (amt > 0) {
+                userBalance += amt;
+                updateBalanceUI();
+                addHistory("Cash Deposit", amt, 'add');
+                saveUserData();
+                document.getElementById('deposit-amount').value = '';
+                showPopup("Payment Successful ✅", `₹${amt} has been added to your wallet!`);
+                switchScreen('view-wallet');
+            }
+        }
+
+        function processWithdraw() {
+            let amt = parseInt(document.getElementById('withdraw-amount').value);
+            if (amt >= 100 && amt <= userBalance) {
+                userBalance -= amt;
+                updateBalanceUI();
+                addHistory("Withdrawal", amt, 'deduct');
+                saveUserData();
+                document.getElementById('withdraw-amount').value = '';
+                showPopup("Withdrawal Requested ⏳", `Your request for ₹${amt} is processing.`);
+                switchScreen('view-wallet');
+            } else {
+                showPopup("Error", "Minimum withdrawal is ₹100, and you must have sufficient balance.");
+            }
+        }
+
+        // --- HISTORY LOGIC ---
+        function addHistory(title, amount, type) {
+            renderHistoryItem(title, amount, type);
+            // Save to local storage
+            let data = JSON.parse(localStorage.getItem('user_' + currentUser));
+            data.history.unshift({title: title, amount: amount, type: type}); // add to top
+            localStorage.setItem('user_' + currentUser, JSON.stringify(data));
+        }
+
+        function renderHistoryItem(title, amount, type) {
+            let list = document.getElementById('transaction-list');
+            let color = type === 'add' ? '#2ea043' : '#f85149';
+            let sign = type === 'add' ? '+' : '-';
+            
+            let html = `
+            <div class="history-item">
+                <div><p style="color:white; font-size:14px;">${title}</p></div>
+                <div style="color:${color}; font-weight:bold;">${sign} ${amount}</div>
+            </div>`;
+            list.innerHTML = html + list.innerHTML;
+        }
+
+        // --- NAVIGATION & POPUPS ---
         function switchNav(tabName) {
-            // Hide main screens
             document.getElementById('view-home').classList.add('hidden');
             document.getElementById('view-wallet').classList.add('hidden');
             document.getElementById('view-profile').classList.add('hidden');
             document.getElementById('view-deposit').classList.add('hidden');
             document.getElementById('view-withdraw').classList.add('hidden');
             
-            // Remove active class from nav
             document.getElementById('nav-home').classList.remove('active-nav');
             document.getElementById('nav-wallet').classList.remove('active-nav');
             document.getElementById('nav-profile').classList.remove('active-nav');
 
-            // Show selected screen & make nav active
             document.getElementById('view-' + tabName).classList.remove('hidden');
             document.getElementById('nav-' + tabName).classList.add('active-nav');
             window.scrollTo(0, 0);
         }
 
-        // Switch internal screens (like Wallet -> Deposit)
         function switchScreen(screenId) {
             document.getElementById('view-home').classList.add('hidden');
             document.getElementById('view-wallet').classList.add('hidden');
@@ -307,92 +419,15 @@
             window.scrollTo(0, 0);
         }
 
-        // Popup functions
         function showPopup(title, msg) {
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-msg').innerText = msg;
-            document.getElementById('modal-actions').innerHTML = '<button class="primary-btn" onclick="closePopup()">Okay</button>';
             document.getElementById('custom-modal').classList.add('show');
         }
 
         function closePopup() {
             document.getElementById('custom-modal').classList.remove('show');
         }
-
-        // Add Transaction History
-        function addHistory(title, amount, type) {
-            let list = document.getElementById('transaction-list');
-            let color = type === 'add' ? '#2ea043' : '#f85149';
-            let sign = type === 'add' ? '+' : '-';
-            
-            let html = `
-            <div class="history-item">
-                <div><p style="color:white; font-size:14px;">${title}</p><p style="color:#8b949e; font-size:12px;">Just Now</p></div>
-                <div style="color:${color}; font-weight:bold;">${sign} ${amount}</div>
-            </div>`;
-            list.innerHTML = html + list.innerHTML;
-        }
-
-        // Match Joining Logic
-        function joinMatch(fee, name) {
-            if (userBalance >= fee) {
-                userBalance -= fee;
-                updateBalanceUI();
-                addHistory(`Joined: ${name}`, fee, 'deduct');
-                showPopup("Success! 🎉", `You successfully joined ${name}.\n\nFee Deducted: ${fee} Pts`);
-            } else {
-                showPopup("Low Balance", "You don't have enough balance. Please Add Funds in Wallet.");
-            }
-        }
-
-        // Deposit Logic
-        function setDepositAmount(amt) {
-            document.getElementById('deposit-amount').value = amt;
-        }
-
-        function processDeposit() {
-            let amt = parseInt(document.getElementById('deposit-amount').value);
-            if (amt > 0) {
-                userBalance += amt;
-                updateBalanceUI();
-                addHistory("Cash Deposit", amt, 'add');
-                document.getElementById('deposit-amount').value = '';
-                showPopup("Payment Successful ✅", `₹${amt} has been added to your wallet!`);
-                switchScreen('view-wallet');
-            } else {
-                showPopup("Error", "Please enter a valid amount to deposit.");
-            }
-        }
-
-        // Withdraw Logic
-        function processWithdraw() {
-            let amt = parseInt(document.getElementById('withdraw-amount').value);
-            let upi = document.getElementById('withdraw-upi').value;
-
-            if (!amt || !upi) {
-                showPopup("Error", "Please fill all details correctly.");
-                return;
-            }
-            if (amt < 100) {
-                showPopup("Error", "Minimum withdrawal limit is ₹100.");
-                return;
-            }
-            if (amt > userBalance) {
-                showPopup("Error", "You cannot withdraw more than your balance.");
-                return;
-            }
-
-            // Process success
-            userBalance -= amt;
-            updateBalanceUI();
-            addHistory("Withdrawal Pending", amt, 'deduct');
-            document.getElementById('withdraw-amount').value = '';
-            document.getElementById('withdraw-upi').value = '';
-            
-            showPopup("Withdrawal Requested ⏳", `Your request for ₹${amt} is processing.\nAmount will reflect in ${upi} shortly.`);
-            switchScreen('view-wallet');
-        }
     </script>
-
 </body>
 </html>
